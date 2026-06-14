@@ -17,20 +17,20 @@ Across both Mozilla engagements: 378 pull requests and 500+ code reviews on `neq
 - **Congestion & flow control.** Switch `neqo`'s default congestion controller to Cubic, enable QUIC Path MTU Discovery, and [stabilize stream receive-window auto-tuning](https://github.com/mozilla/neqo/pull/3314) toward the bandwidth-delay product, lifting a hard 1 MB cap (~160 Mbit/s on a 50 ms link) up to 10 MB.
 - **New protocols.** Implement [MASQUE connect-udp (RFC 9298)](https://github.com/mozilla/neqo/pull/2796) and classic HTTP CONNECT over HTTP/3, QUIC datagrams, and WebTransport — letting Firefox proxy both TCP and UDP over a single HTTP/3 connection.
 - **Happy Eyeballs v3.** Author [`mozilla/happy-eyeballs`](https://github.com/mozilla/happy-eyeballs) from scratch: a protocol-agnostic Rust state machine for dual-stack connection racing (HTTPS/SVCB records, alt-svc, ECH retry configs per RFC 9849, configurable delays), integrated into Firefox. Contributor to the [IETF Happy Eyeballs v3 draft](https://github.com/ietf-wg-happy/draft-happy-eyeballs-v3) itself.
-- **Tooling & telemetry.** Build [criterion end-to-end benchmarks](https://github.com/mozilla/neqo/pull/1758) with CI regression detection, and introduce [Glean metrics](https://bugzilla.mozilla.org/show_bug.cgi?id=1906853) and Firefox profiler markers into the HTTP3/QUIC Rust stack.
+- **Tooling & telemetry.** Add [CI benchmark regression detection](https://github.com/mozilla/neqo/pull/2580), and introduce [Glean metrics](https://bugzilla.mozilla.org/show_bug.cgi?id=1906853) and Firefox profiler markers into the HTTP3/QUIC Rust stack.
 - **Open-source maintainer.** Maintainer of [`quinn-udp`](https://github.com/quinn-rs/quinn/tree/main/quinn-udp) (45 PRs), the cross-platform UDP IO crate shared by Quinn and Firefox, resolving platform issues (Windows ARM USO, Android `EINVAL`, macOS address families) that benefit the wider Rust networking ecosystem.
 
 ### External contributor to Mozilla's HTTP3/QUIC stack
 
 December 2023 - May 2024
 
-- 89 pull requests to [github.com/mozilla/neqo](https://github.com/mozilla/neqo).
-- Refactor client and server implementation [away from `mio` to `tokio`](https://github.com/mozilla/neqo/pulls?q=is%3Apr+is%3Aclosed+author%3Amxinden+merged%3A%3C2024-06-01+bin).
-- Rewrite UDP IO path, [leveraging `sendmsg`, `recvmmsg` and `GRO` via `quinn-udp`](https://github.com/mozilla/neqo/pulls?q=is%3Apr+is%3Aclosed+author%3Amxinden+merged%3A%3C2024-06-01+quinn-udp).
-- Replace mozilla-central's `http3server` custom UDP IO stack, reusing new IO stack in [github.com/mozilla/neqo](https://github.com/mozilla/neqo) instead. See [bugzilla#1895319](https://bugzilla.mozilla.org/show_bug.cgi?id=1895319).
-- Report and fix security vulnerability due to unbounded memory allocation based on unsanitized network input. See [bugzilla#1875701](https://bugzilla.mozilla.org/show_bug.cgi?id=1875701) and [CVE-2024-2613](https://www.mozilla.org/en-US/security/advisories/mfsa2024-12/#CVE-2024-2613).
-- Fix cross-layer race conditions, see e.g. [github.com/mozilla/neqo#1819](https://github.com/mozilla/neqo/issues/1819).
-- Draft stream receive window auto-tuning, preventing upper throughput limit on high bandwidth-delay-product connections (e.g. 160 Mbit/s on 50 ms connection). See [github.com/mozilla/neqo#1868](https://github.com/mozilla/neqo/pull/1868).
+89 pull requests to [`mozilla/neqo`](https://github.com/mozilla/neqo) before joining full-time, laying much of the groundwork for the work above.
+
+- **UDP IO foundation.** Rewrite neqo's client and server UDP IO path, [leveraging `sendmsg`, `recvmmsg` and `GRO` via `quinn-udp`](https://github.com/mozilla/neqo/pulls?q=is%3Apr+is%3Aclosed+author%3Amxinden+merged%3A%3C2024-06-01+quinn-udp).
+- **Binary refactor.** Move the client and server [from `mio` to `tokio`](https://github.com/mozilla/neqo/pulls?q=is%3Apr+is%3Aclosed+author%3Amxinden+merged%3A%3C2024-06-01+bin), [merge them into a single `neqo-bin` crate](https://github.com/mozilla/neqo/pull/1724), and [replace mozilla-central's `http3server` custom UDP IO stack](https://bugzilla.mozilla.org/show_bug.cgi?id=1895319) with the shared neqo code.
+- **Benchmarking & CI.** Introduce [criterion end-to-end benchmarks](https://github.com/mozilla/neqo/pull/1758) — enabling the data-driven optimization that followed — and stand up CI including the [QUIC Interop Runner](https://github.com/mozilla/neqo/pull/1682) and a [merge queue](https://github.com/mozilla/neqo/pull/1674).
+- **Security.** Report and fix a [security vulnerability](https://bugzilla.mozilla.org/show_bug.cgi?id=1875701) — unbounded memory allocation from unsanitized network input ([CVE-2024-2613](https://www.mozilla.org/en-US/security/advisories/mfsa2024-12/#CVE-2024-2613)).
+- **Correctness & performance.** Fix [cross-layer race conditions](https://github.com/mozilla/neqo/issues/1819) and draft [stream receive-window auto-tuning](https://github.com/mozilla/neqo/pull/1868), removing an upper throughput limit on high bandwidth-delay-product connections (e.g. 160 Mbit/s on a 50 ms link).
 
 ### Software Engineer at Protocol Labs
 
