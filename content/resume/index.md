@@ -9,24 +9,28 @@ author: Max Leonard Inden
 
 June 2024 - now
 
-- [Rewrite](https://bugzilla.mozilla.org/show_bug.cgi?id=1901292) Firefox's QUIC UDP IO path.
-  - Move to Rust via `quinn-udp`. See [bugzilla#1901295](https://bugzilla.mozilla.org/show_bug.cgi?id=1901295).
-  - Switch to multi-packet UDP IO using OS mechanisms like `recvmmsg`, generic receive offloading, across Linux, Windows, and Android.
-  - Enables support for ancillary IP metadata, such as Explicit Congestion Notification (ECN), improving congestion signals. See [bugzilla#1902065](https://bugzilla.mozilla.org/show_bug.cgi?id=1902065).
-  - [Refactor](https://github.com/mozilla/neqo/pull/2184) UDP QUIC receive path to not allocate up to encryption layer.
-- Introduce Glean metrics into HTTP3/QUIC Rust stack. See [bugzilla#1906853](https://bugzilla.mozilla.org/show_bug.cgi?id=1906853).
+Core maintainer of Firefox's QUIC / HTTP/3 networking stack: [`neqo`](https://github.com/mozilla/neqo) (Mozilla's Rust QUIC implementation), its integration into Firefox, and related open-source libraries.
+Across both Mozilla engagements: 378 pull requests and 500+ code reviews on `neqo`, 100+ commits to Firefox, and 17+ shepherded `neqo` releases (v0.9.0 to v0.25.0).
+
+- **Multi-gigabit UDP IO.** [Rewrite](https://bugzilla.mozilla.org/show_bug.cgi?id=1901292) Firefox's legacy NSPR-based UDP IO path as a modern, memory-safe Rust stack on top of [`quinn-udp`](https://github.com/quinn-rs/quinn/tree/main/quinn-udp), [rolled out](https://bugzilla.mozilla.org/show_bug.cgi?id=1901295) across Linux, Windows, macOS and Android. Multi-packet IO (`recvmmsg`), Generic Segmentation/Receive Offload (GSO/GRO) and a [zero-allocation receive path](https://github.com/mozilla/neqo/pull/2184) raised CPU-bound throughput from < 1 Gbit/s to [4 Gbit/s](https://max-inden.de/post/fast-udp-io-in-firefox/). Built [IO benchmarks](https://github.com/mozilla/neqo/pull/1758) with [CI regression detection](https://github.com/mozilla/neqo/pull/2580) to drive the work.
+- **Explicit Congestion Notification (ECN).** Implement [end-to-end QUIC ECN](https://bugzilla.mozilla.org/show_bug.cgi?id=1902065): marking, reading, RFC 9000 path validation and Congestion Experienced feedback to the congestion controller, resilient to middlebox interference. ~50% of Firefox Nightly QUIC connections now run on ECN-capable paths.
+- **Flow control.** [Stabilize stream receive-window auto-tuning](https://github.com/mozilla/neqo/pull/3314) toward the bandwidth-delay product, replacing a hard 1 MB cap (~160 Mbit/s on a 50 ms link).
+- **New protocols.** Implement [MASQUE connect-udp (RFC 9298)](https://github.com/mozilla/neqo/pull/2796) and classic HTTP CONNECT over HTTP/3, letting Firefox proxy both TCP and UDP over a single HTTP/3 connection. Improve WebTransport support.
+- **Happy Eyeballs v3.** Author [`mozilla/happy-eyeballs`](https://github.com/mozilla/happy-eyeballs) from scratch: a protocol-agnostic Rust state machine for dual-stack connection racing (HTTPS/SVCB records, alt-svc, ECH retry configs per RFC 9849), integrated into Firefox. Contribute to the [IETF Happy Eyeballs v3 draft](https://github.com/ietf-wg-happy/draft-happy-eyeballs-v3) and present the work at [IETF 125](https://youtu.be/l9eId_Yjoew).
+- **Telemetry & profiling.** Introduce [Glean metrics](https://bugzilla.mozilla.org/show_bug.cgi?id=1906853) and Firefox profiler markers into the HTTP3/QUIC Rust stack.
+- **[`quinn-udp`](https://github.com/quinn-rs/quinn/tree/main/quinn-udp) maintainer.** The cross-platform UDP IO crate shared by Quinn and Firefox (45 PRs); fix platform issues (Windows ARM USO, Android `EINVAL`, macOS address families) that benefit the wider Rust networking ecosystem.
 
 ### External contributor to Mozilla's HTTP3/QUIC stack
 
 December 2023 - May 2024
 
-- 89 pull requests to [github.com/mozilla/neqo](https://github.com/mozilla/neqo).
-- Refactor client and server implementation [away from `mio` to `tokio`](https://github.com/mozilla/neqo/pulls?q=is%3Apr+is%3Aclosed+author%3Amxinden+merged%3A%3C2024-06-01+bin).
-- Rewrite UDP IO path, [leveraging `sendmsg`, `recvmmsg` and `GRO` via `quinn-udp`](https://github.com/mozilla/neqo/pulls?q=is%3Apr+is%3Aclosed+author%3Amxinden+merged%3A%3C2024-06-01+quinn-udp).
-- Replace mozilla-central's `http3server` custom UDP IO stack, reusing new IO stack in [github.com/mozilla/neqo](https://github.com/mozilla/neqo) instead. See [bugzilla#1895319](https://bugzilla.mozilla.org/show_bug.cgi?id=1895319).
-- Report and fix security vulnerability due to unbounded memory allocation based on unsanitized network input. See [bugzilla#1875701](https://bugzilla.mozilla.org/show_bug.cgi?id=1875701) and [CVE-2024-2613](https://www.mozilla.org/en-US/security/advisories/mfsa2024-12/#CVE-2024-2613).
-- Fix cross-layer race conditions, see e.g. [github.com/mozilla/neqo#1819](https://github.com/mozilla/neqo/issues/1819).
-- Draft stream receive window auto-tuning, preventing upper throughput limit on high bandwidth-delay-product connections (e.g. 160 Mbit/s on 50 ms connection). See [github.com/mozilla/neqo#1868](https://github.com/mozilla/neqo/pull/1868).
+89 pull requests to [`mozilla/neqo`](https://github.com/mozilla/neqo) before joining Mozilla full-time, laying much of the groundwork for the work above.
+
+- **UDP IO foundation.** Rewrite neqo's client and server UDP IO path, [leveraging `sendmsg`, `recvmmsg` and `GRO` via `quinn-udp`](https://github.com/mozilla/neqo/pulls?q=is%3Apr+is%3Aclosed+author%3Amxinden+merged%3A%3C2024-06-01+quinn-udp).
+- **Binary refactor.** Move the client and server [from `mio` to `tokio`](https://github.com/mozilla/neqo/pulls?q=is%3Apr+is%3Aclosed+author%3Amxinden+merged%3A%3C2024-06-01+bin), [merge them into a single `neqo-bin` crate](https://github.com/mozilla/neqo/pull/1724), and [replace mozilla-central's `http3server` custom UDP IO stack](https://bugzilla.mozilla.org/show_bug.cgi?id=1895319) with the shared neqo code.
+- **CI.** Add an initial [QUIC Interop Runner](https://github.com/mozilla/neqo/pull/1682) integration.
+- **Security.** Report and fix a [security vulnerability](https://bugzilla.mozilla.org/show_bug.cgi?id=1875701) (unbounded memory allocation from unsanitized network input, [CVE-2024-2613](https://www.mozilla.org/en-US/security/advisories/mfsa2024-12/#CVE-2024-2613)).
+- **Correctness & performance.** Fix [cross-layer race conditions](https://github.com/mozilla/neqo/issues/1819) and draft [stream receive-window auto-tuning](https://github.com/mozilla/neqo/pull/1868), removing an upper throughput limit on high bandwidth-delay-product connections (e.g. 160 Mbit/s on a 50 ms link).
 
 ### Software Engineer at Protocol Labs
 
@@ -81,8 +85,8 @@ Development of a master data management web application. Involved as a back and
 front end JavaScript engineer. Spearheaded the introduction of a full stack
 JavaScript testing environment including a continuous integration pipeline to
 improve code quality and detect errors early. Coordinated and implemented the
-transformation of the UI to ReactJS reducing side effects and code reusability
-with a component based approach.  Providing company wide ReactJS workshops to
+transformation of the UI to ReactJS, reducing side effects and improving code
+reusability with a component-based approach.  Providing company wide ReactJS workshops to
 accelerate the transition.
 
 
@@ -93,7 +97,7 @@ February - July 2014
 Concept creation, development and sales of a Microsoft Office Add-on to support
 compliance processes for the enterprise document management in the finance
 sector. Responsible for the application software testing. Introduction of a new
-human ressource management framework.
+human resource management framework.
 
 
 ### Associate System Support Analyst at DHL IT-Services
@@ -116,8 +120,12 @@ maintanance, network architecture and software distribution.
 
 ## Projects & Achievements
 
+- Author and maintainer of [`mozilla/happy-eyeballs`](https://github.com/mozilla/happy-eyeballs), the first Rust implementation of the IETF [Happy Eyeballs v3](https://github.com/ietf-wg-happy/draft-happy-eyeballs-v3) connection-racing draft: a protocol-agnostic state machine (HTTPS/SVCB records, alt-svc, ECH retry per RFC 9849) shipped in Firefox; also contributor to the IETF draft itself (2026).
+
+- Drive Firefox's QUIC UDP IO rewrite to a memory-safe Rust stack, raising CPU-bound throughput from < 1 Gbit/s to [4 Gbit/s](https://max-inden.de/post/fast-udp-io-in-firefox/) through multi-packet IO and [segmentation offload](https://github.com/mozilla/neqo/pull/2593) (2025).
+
 - Implement [receive window auto-tuning (flow-control)](https://github.com/libp2p/rust-yamux/pull/176) in Rust Yamux multiplexer implementation based on bandwidth-delay-product, moving peak throughput from ~30 Mbit/s to 1.3 Gbit/s (2023-11-23).
-  In addition [improve flow-control strategy](https://discuss.libp2p.io/t/optimizing-yamux-flow-control-sending-window-update-frames-early/843/1) measuring an additioanl performance increase of 25% in the wild (2021-02-11).
+  In addition [improve flow-control strategy](https://discuss.libp2p.io/t/optimizing-yamux-flow-control-sending-window-update-frames-early/843/1) measuring an additional performance increase of 25% in the wild (2021-02-11).
 
 - Creator and maintainer of official [Prometheus Rust client library](https://github.com/prometheus/client_rust) (2022-01-16).
 
