@@ -67,11 +67,6 @@ name = "github"
 title = ""
 url = "https://github.com/mxinden"
 
-[[params.socialIcons]]
-name = "Twitter"
-title = ""
-url = "https://twitter.com/mxinden"
-
 
 [params]
   author = "Max Inden"
@@ -86,7 +81,7 @@ url = "https://twitter.com/mxinden"
   # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
   logoTitle = "Max Inden"        # default: the title value    # 默认值: 上面设置的title值
   keywords = []
-  description = ""
+  description = "Max Inden, software engineer at Mozilla working on Firefox's QUIC and HTTP/3 networking stack. Writing on networking, distributed systems, and the open Internet."
 
   # paginate of archives, tags and categories             # 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值
   archivePaginate = 1000
