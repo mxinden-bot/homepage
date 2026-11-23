@@ -1,0 +1,11 @@
+/* Make links in the home page intro look like links. */
+.home-info .entry-header a,
+.home-info .entry-content a {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15em;
+}
+.home-info .entry-header a:hover,
+.home-info .entry-content a:hover {
+    text-decoration-thickness: 3px;
+}
