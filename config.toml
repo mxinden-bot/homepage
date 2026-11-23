@@ -24,12 +24,12 @@ theme = "PaperMod"
   url = "/resume"
 [[menu.main]]             # config your menu              # 配置目录
   name = "Readings"
-  weight = 11
+  weight = 12
   identifier = "readings"
   url = "/readings"
 [[menu.main]]
   name = "Talks"
-  weight = 15
+  weight = 11
   identifier = "talks"
   url = "/talks/"
 [[menu.main]]
