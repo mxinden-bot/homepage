@@ -1,6 +1,6 @@
 ---
 date: 2022-04-30
-title: Talk "Hole punching with libp2p" @p2p-paris
+title: Hole punching with libp2p @p2p-paris
 aliases: ["/post/2022-04-30-hole-punching-with-libp2p/"]
 tags: [tech, talk, libp2p]
 ---

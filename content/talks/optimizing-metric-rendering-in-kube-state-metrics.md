@@ -1,6 +1,6 @@
 ---
 date: 2019-05-22T00:00:00Z
-title: Talk Optimizing Metric Rendering in kube-state-metrics
+title: Optimizing Metric Rendering in kube-state-metrics
 aliases: ["/post/optimizing-metric-rendering-in-kube-state-metrics/"]
 tags: [talk]
 ---

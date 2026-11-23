@@ -1,6 +1,6 @@
 ---
 date: 2026-07-20
-title: Talk "A Report on Firefox's HEv3 Implementation" @IETF 126
+title: A Report on Firefox's HEv3 Implementation @IETF 126
 aliases: ["/post/a-report-on-firefoxs-hev3-implementation/"]
 tags: [tech, talk, firefox, networking, happy-eyeballs]
 ShowToc: true

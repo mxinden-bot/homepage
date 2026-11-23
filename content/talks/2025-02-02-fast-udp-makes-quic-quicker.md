@@ -1,6 +1,6 @@
 ---
 date: 2025-02-02
-title: Talk "Fast UDP makes QUIC quicker - optimizing Firefox’s HTTP3 IO stack" @FOSDEM
+title: Fast UDP makes QUIC quicker - optimizing Firefox’s HTTP3 IO stack @FOSDEM
 aliases: ["/post/2025-02-02-fast-udp-makes-quic-quicker/"]
 tags: [tech, talk, quic, firefox]
 ---

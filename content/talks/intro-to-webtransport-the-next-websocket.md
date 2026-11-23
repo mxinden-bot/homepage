@@ -1,6 +1,6 @@
 ---
 date: 2026-01-31
-title: Talk "Intro to WebTransport - the next WebSocket?!" @FOSDEM
+title: Intro to WebTransport - the next WebSocket?! @FOSDEM
 aliases: ["/post/intro-to-webtransport-the-next-websocket/"]
 tags: [tech, quic, firefox, networking, http3]
 ShowToc: true

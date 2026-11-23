@@ -1,6 +1,6 @@
 ---
 date: 2018-09-26T00:00:00Z
-title: Talk Self-Service Monitoring
+title: Self-Service Monitoring
 aliases: ["/post/self-service-monitoring/"]
 ---
 

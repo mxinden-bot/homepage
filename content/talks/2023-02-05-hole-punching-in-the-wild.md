@@ -1,6 +1,6 @@
 ---
 date: 2023-02-05
-title: Talk "Hole punching in the wild" @FOSDEM
+title: Hole punching in the wild @FOSDEM
 aliases: ["/post/2023-02-05-hole-punching-in-the-wild/"]
 tags: [tech, talk, libp2p]
 ---

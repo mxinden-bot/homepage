@@ -1,6 +1,6 @@
 ---
 date: 2017-10-22T00:00:00Z
-title: Talk Self-healing Kubernetes
+title: Self-healing Kubernetes
 aliases: ["/post/self-healing-k8s/"]
 tags: [tech, talk]
 ---

@@ -1,6 +1,6 @@
 ---
 date: 2017-08-19
-title: Talk End-to-end monitoring with the Prometheus Operator
+title: End-to-end monitoring with the Prometheus Operator
 aliases: ["/post/end-to-end-monitoring-with-the-prometheus-operator/"]
 tags: [talk]
 ---

@@ -1,6 +1,6 @@
 ---
 date: 2021-07-20
-title: Talk Intro to libp2p
+title: Intro to libp2p
 aliases: ["/post/intro-to-libp2p/"]
 tags: [talk]
 ---
