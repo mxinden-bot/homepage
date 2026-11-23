@@ -32,7 +32,7 @@ Since then lots happened. A couple of milestones I was involved in:
 - We shipped many developer experience improvements, taming some of the complexity inherent to peer-to-peer networking e.g. the [`SwarmBuilder`](https://github.com/libp2p/rust-libp2p/pull/4120).
 - Security is hard, especially on the internet, doubly so when in a peer-to-peer setting.
   A lot of our work went into security fixes, especially around DOS attacks.
-  See e.g. a [major memory exhaustion attack](https://github.com/libp2p/rust-libp2p/security/advisories/GHSA-jvgw-gccv-q5p8) and [a talk](https://max-inden.de/post/2022-11-02-dos-defense-dos-and-donts/) inspired by this work.
+  See e.g. a [major memory exhaustion attack](https://github.com/libp2p/rust-libp2p/security/advisories/GHSA-jvgw-gccv-q5p8) and [a talk](https://max-inden.de/talks/2022-11-02-dos-defense-dos-and-donts/) inspired by this work.
 - Talking about talks, I gave [several](https://max-inden.de/tags/talk/) on peer-to-peer networking and libp2p as well as helped organize related conferences, e.g. the FOSDEM networking devroom.
 - As a final big contribution, the before mentioned automated performance benchmark setup enabled me to land a major improvement to libp2p's bandwidth performance.
   Implementing [stream receive window auto-tuning in the Rust Yamux implementation](https://github.com/libp2p/rust-yamux/pull/176) improved throughput on high bandwidth connections from 33 Mbit/s to 1.3 Gbit/s.

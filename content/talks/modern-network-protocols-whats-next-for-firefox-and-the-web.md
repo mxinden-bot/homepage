@@ -1,6 +1,7 @@
 ---
 date: 2026-01-31
 title: Talk "Modern Network Protocols — What’s Next for Firefox and the Web?" @FOSDEM
+aliases: ["/post/modern-network-protocols-whats-next-for-firefox-and-the-web/"]
 tags: [tech, quic, firefox, networking, http3]
 ShowToc: true
 TocOpen: false

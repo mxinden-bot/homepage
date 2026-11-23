@@ -1,6 +1,7 @@
 ---
 date: 2026-04-21
 title: Working Draft - HTTP/3 und WebTransport mit Max Inden
+aliases: ["/post/working-draft-http3-and-webtransport-podcast/"]
 tags: [tech, quic, firefox, networking, webtransport]
 ShowToc: true
 TocOpen: false

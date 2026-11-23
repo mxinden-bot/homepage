@@ -1,6 +1,7 @@
 ---
 date: 2017-08-18
 title: Talk Improving user and developer experience of the Alertmanager UI
+aliases: ["/post/improving-user-and-developer-experience-of-the-alertmanager-ui/"]
 tags: [talk]
 ---
 

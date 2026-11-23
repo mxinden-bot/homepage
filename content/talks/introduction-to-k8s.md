@@ -1,6 +1,7 @@
 ---
 date: 2017-08-19
 title: Talk Intro to Kubernetes
+aliases: ["/post/introduction-to-k8s/"]
 tags: [talk]
 ---
 

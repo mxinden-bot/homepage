@@ -1,6 +1,7 @@
 ---
 date: 2025-10-29
 title: netstack.fm - Modern networking in Firefox with Max Inden 
+aliases: ["/post/modern-networking-in-firefox-podcast/"]
 tags: [tech, quic, firefox, rust, networking]
 ShowToc: true
 TocOpen: false

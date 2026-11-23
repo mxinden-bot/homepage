@@ -28,6 +28,11 @@ theme = "PaperMod"
   identifier = "readings"
   url = "/readings"
 [[menu.main]]
+  name = "Talks"
+  weight = 15
+  identifier = "talks"
+  url = "/talks/"
+[[menu.main]]
   name = "Archive"
   weight = 20
   identifier = "archive"
@@ -70,6 +75,7 @@ url = "https://github.com/mxinden"
 
 [params]
   author = "Max Inden"
+  mainSections = ["post"]   # home page and archive list blog posts only; talks live under /talks/
   version = "4.x"           # Used to give a friendly message when you have an incompatible update
   debug = false             # If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
 
