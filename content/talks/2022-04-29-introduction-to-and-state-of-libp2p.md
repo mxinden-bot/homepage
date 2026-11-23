@@ -1,6 +1,7 @@
 ---
 date: 2022-04-29
 title: Talk "Introduction to and State of libp2p" @p2p-paris
+aliases: ["/post/2022-04-29-introduction-to-and-state-of-libp2p/"]
 tags: [talk, tech, libp2p]
 ---
 

@@ -1,6 +1,7 @@
 ---
 date: 2023-04-16
 title: Talk "Connecting everything, everywhere, all at once" @IPFS-Thing
+aliases: ["/post/2023-04-16-connecting-everything-everywhere-all-at-once/"]
 tags: [tech, talk, libp2p]
 ---
 

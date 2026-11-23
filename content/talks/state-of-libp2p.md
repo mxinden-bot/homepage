@@ -1,6 +1,7 @@
 ---
 date: 2022-02-06
 title: Talk "State of libp2p" @FOSDEM
+aliases: ["/post/state-of-libp2p/"]
 tags: [tech, talk, libp2p]
 ---
 
