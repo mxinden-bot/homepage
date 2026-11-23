@@ -10,5 +10,3 @@ Since IETF 126, Happy Eyeballs v3 is on by default in Nightly and rolled out to 
 
 - **Slides: [mxinden-bot.github.io/slides/14-hev3-ietf127](https://mxinden-bot.github.io/slides/14-hev3-ietf127/)**
 - **Recording: [youtu.be/z7cGDl6DjcQ?t=2501](https://youtu.be/z7cGDl6DjcQ?t=2501)**
-
-Feedback welcome, either on [mozilla/happy-eyeballs](https://github.com/mozilla/happy-eyeballs/issues) or via mail.
