@@ -1,6 +1,6 @@
 ---
 date: 2026-11-16
-title: Talk "Happy Eyeballs v3 in Firefox" @IETF-127
+title: Talk "Happy Eyeballs v3 in Firefox" @IETF 127
 tags: [tech, talk, firefox, networking, happy-eyeballs, http3]
 ---
 

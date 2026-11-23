@@ -1,6 +1,7 @@
 ---
 date: 2026-03-18
 title: Talk "Happy Eyeballs v3 in Firefox" @IETF 125
+aliases: ["/post/happy-eyeballs-v3-in-firefox/"]
 tags: [tech, talk, firefox, networking, happy-eyeballs]
 ShowToc: true
 TocOpen: false
