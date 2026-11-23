@@ -1,6 +1,7 @@
 ---
 date: 2023-02-05
 title: Talk "DOS Defense - Do’s and Don’ts" @IPFS-Camp
+aliases: ["/post/2022-11-02-dos-defense-dos-and-donts/"]
 tags: [tech, talk, libp2p]
 ---
 

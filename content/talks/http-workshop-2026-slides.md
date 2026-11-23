@@ -1,6 +1,7 @@
 ---
 date: 2026-07-17
 title: Slides from the HTTP Workshop 2026
+aliases: ["/post/http-workshop-2026-slides/"]
 tags: [tech, quic, http3, firefox, networking]
 ---
 

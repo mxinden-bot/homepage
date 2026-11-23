@@ -1,0 +1,29 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+</header>
+
+{{- with .Content }}
+<div class="post-content md-content">{{ . }}</div>
+{{- end }}
+
+{{- range .RegularPages.GroupByPublishDate "2006" }}
+<div class="archive-year">
+  <h2 class="archive-year-header" id="{{ .Key }}">
+    <a class="archive-header-link" href="#{{ .Key }}">{{ .Key }}</a>
+    <sup class="archive-count">&nbsp;{{ len .Pages }}</sup>
+  </h2>
+  <div class="archive-posts">
+    {{- range .Pages }}
+    <div class="archive-entry">
+      <h3 class="archive-entry-title entry-hint-parent">{{ .Title | markdownify }}</h3>
+      <div class="archive-meta">{{ .Date | time.Format (default "January 2, 2006" site.Params.DateFormat) }}</div>
+      <a class="entry-link" aria-label="link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+    </div>
+    {{- end }}
+  </div>
+</div>
+{{- end }}
+
+{{- end }}{{/* end main */}}

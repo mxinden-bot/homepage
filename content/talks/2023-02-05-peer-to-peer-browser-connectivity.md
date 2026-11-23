@@ -1,6 +1,7 @@
 ---
 date: 2023-02-05
 title: Talk "Peer-to-peer Browser Connectivity" @FOSDEM
+aliases: ["/post/2023-02-05-peer-to-peer-browser-connectivity/"]
 tags: [tech, talk, libp2p]
 ---
 
